@@ -1,12 +1,14 @@
 const express = require('express');
 const routes = require('./routes');
 const PORT = process.env.PORT || 3000;
-const db = require("./db/index")
-let morgan = require('morgan');
+const db = require("./db/index");
+const morgan = require('morgan');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const Game = require('./models/game');
 
 const app = express();
+app.use(cors('http://jeremy-rose.com'));
 app.use(morgan("default"));
 app.use(bodyParser.json());
 app.use('/api', routes);
