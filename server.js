@@ -9,7 +9,7 @@ const Game = require('./models/game');
 
 const app = express();
 app.use(cors(['http://jeremy-rose.com','localhost']));
-app.use(morgan("default"));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use('/api', routes);
 

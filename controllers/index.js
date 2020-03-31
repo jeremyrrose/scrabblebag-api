@@ -67,10 +67,25 @@ const trade = async (req, res) => {
     }
 }
 
+const settings = async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.gameId);
+        const latestDraws = game.draws.slice(game.draws.length > 5 ? -5 : game.draws.length * (-1));
+        const settings = {
+            latestDraws: latestDraws.map(draw => draw.length),
+            latestDraw: latestDraws[latestDraws.length - 1]
+        };
+        return res.status(201).json({ settings });
+    } catch (error) {
+        return res.status(500).json({error: error.message});
+    }
+}
+
 module.exports = {
     createGame,
     bag,
     draw,
     undo,
-    trade
+    trade,
+    settings
 }
